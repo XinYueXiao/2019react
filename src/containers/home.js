@@ -61,7 +61,7 @@ class home extends Component {
         }).filter(item => {
             return item.date.includes(`${currentDate.year}-${padLeft(currentDate.month)}`)
         })
-        console.log("TCL: home -> render -> itemsWithCategory", itemsWithCategory)
+
         let totalInCome = 0
         let totalOutCome = 0
         itemsWithCategory.forEach(item => {

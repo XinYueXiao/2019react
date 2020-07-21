@@ -1,6 +1,6 @@
 export const newItems = {
   title: 'dd',
-  id: 3,
+  id: 6,
   price: 500,
   date: '2019-06-22',
   cid: 1
@@ -16,13 +16,7 @@ export const items = [{
   id: 2,
   price: 100,
   date: '2019-06-22',
-  category: {
-    "name": "旅行",
-    "iconName": "ios-plane",
-    "id": "1",
-    "type": "outcome",
-    cid: 2
-  }
+  cid: 2
 }]
 export const categoryData = {
   1: {
