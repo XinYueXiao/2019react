@@ -42,7 +42,7 @@ function TestForm(props) {
             <Form>
                 <Form.Item style={{ width: 300 }}>
                     {getFieldDecorator('password', {
-                        initialValue: ['202005'],
+                        initialValue: [],
                         rules: [{ required: true, message: 'Please input your Password!' }],
                     })(
                         <CalendarMore list={data} />

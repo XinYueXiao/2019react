@@ -33,10 +33,10 @@ function CalendarMore(props) {
             <div className='calendar-more' >
                 <div className='show-box'  >
                     <div className='selected-show'>
-                        {selectedValue.map(one => <div key={one} className='selected-item'>
+                        {selectedValue.length > 0 ? selectedValue.map(one => <div key={one} className='selected-item'>
                             {one}
                             <Icon type="close" onClick={() => setSelectedValueChange(selectedValue.filter(item => item != one))} />
-                        </div>)}
+                        </div>) : <span style={{ color: 'rgba(0, 0, 0, 0.30)' }}>请选择日期</span>}
                     </div>
                     <div className='icon-calendar' onClick={() => setIsShow(!isShow)}><Icon type="calendar" /></div>
                 </div>
