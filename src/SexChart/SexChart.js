@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './SexChart.css';
-
+import { Icon } from 'antd'
+import { download } from './download'
+import numeral from 'numeral'
+console.log("download", download)
 function SexChart() {
-    const a = {
+    const data = {
         "type": 0,
         "month": "202002",
         "cityName": "北京市",
@@ -34,13 +37,30 @@ function SexChart() {
     const [boxWidth, setBoxWidth] = useState(0)
     useEffect(() => {
         setBoxWidth(document.getElementById('js-sex-box-id').clientWidth)
+        window.addEventListener('resize', resizeWindow)
+        return () => {
+            window.removeEventListener('resize', resizeWindow)
+        }
     }, [])
-    const ageKeys = Object.keys(a).filter(one => one.search('age') != -1)
+    function resizeWindow() {
+        setBoxWidth(document.getElementById('js-sex-box-id').clientWidth)
+    }
+
+    const ageKeys = Object.keys(data).filter(one => one.search('age') != -1)
     const list = ageKeys.map((one, index) => {
         const type = one.split('age')[1]
+        let start = type.slice(0, 2)
+        let end = type.slice(2, 4)
+        let typeName = `${start}-${end}`
+        if (start == '00') {
+            typeName = end + '以下'
+        }
+        if (end == 'up') {
+            typeName = start + '以上'
+        }
         return {
-            male: a[one],
-            type: `${type.slice(0, 2)}-${type.slice(2, 4)}`
+            male: data[one],
+            type: typeName
         }
     })
 
@@ -49,34 +69,55 @@ function SexChart() {
             return a - b;
         })
         const maxNumber = newArr[newArr.length - 1]
-        const size = (boxWidth - 220) / 6
+        const size = (boxWidth - 130) / 6
         const percentage = (number / maxNumber) * size
-        return percentage < 1 ? Math.ceil(percentage) : Math.round(percentage)
+        const count = percentage < 1 ? Math.ceil(percentage) : Math.round(percentage)
+        return count
     }
-
+    function getNumber(number) {
+        let unit = ''
+        let numberFormat = number
+        if (number > 9999) {
+            numberFormat = numeral(numberFormat / 10000).format(',')
+            unit = '万'
+        }
+        return numberFormat + unit
+    }
+    function getPre(key) {
+        const count = data.male + data.female
+        return numeral(data[key] / count).format('0.0%')
+    }
     return (
         <div className='sex-chart' id='js-sex-box-id'>
-            <div>年龄性别</div>
-            <div className='sum-count'>
-                <div className='male-number'>6,011万人</div>
-                <div className='male'>男性：46%</div>
-                <div className='male-type'></div>
-                <div className='female'>女性：54%</div>
-                <div className='female-number'>11601万人</div>
+            <div className='sex-chart-title'>
+                年龄性别
+                <div className='download-box'>
+                    <Icon type="download" className='download-icon' onClick={() => download('js-download-id')} />
+                    <div className='save-img'>保存为图片</div>
+                </div>
             </div>
-            <div>
-                {list.map((one, index) => <div key={index} className='row-sex-number'>
-                    <div className='male-number number-width'>{one.male}</div>
-                    <div className='male person-width'>
-                        <PersonNumber number={getPercentage(one.male)} />
-                    </div>
-                    <div className='male-type'>{one.type}</div>
-                    {/* <div className='female person-width'>
+            <div id='js-download-id'>
+                <div className='sum-count'>
+                    <div className='male-number'>{getNumber(data.male)}人</div>
+                    <div className='male'>男性：{getPre('male')}</div>
+                    {/* <div className='male-type'></div> */}
+                    <div className='female'>女性：{getPre('female')}</div>
+                    <div className='female-number'>{getNumber(data.female)}人</div>
+                </div>
+                <div>
+                    {list.map((one, index) => <div key={index} className='row-sex-number'>
+                        <div className='male-number number-width'>{getNumber(one.male)}</div>
+                        <div className='male person-width'>
+                            <PersonNumber number={getPercentage(one.male)} />
+                        </div>
+                        <div className='male-type'>{one.type}</div>
+                        {/* <div className='female person-width'>
             <PersonNumber number={getPercentage(one.female)} sex='female' />
           </div>
           <div className='female-number number-width'>{one.female}</div> */}
-                </div>)}
+                    </div>)}
 
+                </div>
             </div>
         </div>
 

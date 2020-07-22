@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import CalendarMore from './CalendarMore'
-import SexChart from './SexChart/index'
+import SexChart from './SexChart/SexChart'
 function App() {
 
   return (

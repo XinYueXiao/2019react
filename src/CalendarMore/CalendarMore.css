@@ -34,7 +34,6 @@
     display: flex;
     overflow-x: auto;
 }
-.selected-show::-webkit-scrollbar {display: none;}
 .icon-calendar{
     width: 20px;
 }
@@ -44,7 +43,7 @@
 .calendar-content{
     position: fixed;
     z-index: 99999;
-    width:152px;
+    width:300px;
     height:205px;
     background:rgba(255,255,255,1);
     box-shadow:0px 0px 6px 0px rgba(0,0,0,0.15);
@@ -72,6 +71,29 @@
     justify-content: space-around;
     font-size: 12px;
 }
+.selected-show::-webkit-scrollbar {
+    width: 3px;
+    height: 3px;
+  }
+
+  /* Track */
+
+  .selected-show::-webkit-scrollbar-track {
+    -webkit-box-shadow: none;
+    border-radius: 0;
+    background-color: transparent;
+  }
+
+  /* Handle */
+
+  .selected-show::-webkit-scrollbar-thumb {
+    width: 2px !important;
+    height: 6px !important;
+    border-radius: 4px;
+    background: rgba(111, 33, 212, 0.8);
+    -webkit-box-shadow: inset 0 0 6px rgba(103, 82, 197, 0.3);
+  }
+
 .selected-item{
     background: #F0E5FF;
     color: #4B00A7;

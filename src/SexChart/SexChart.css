@@ -1,6 +1,36 @@
 
 .sex-chart {
-    width: 500px;
+    width:100%;
+    font-size: 12px;
+    color:#000
+}
+.sex-chart-title{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.download-icon{
+    font-size: 16px;
+}
+.download-icon:hover{
+    color:rgba(0, 131, 250, 0.85);
+}
+.download-box{
+    width: 20px;
+    height: 20px;
+    position: relative;
+    transition: all 0.3s;
+}
+.download-box:hover>.save-img{
+    display: block;
+}
+.save-img{
+    display: none;
+    position: fixed;
+    margin-left: -20px;
+    margin-top: -4px;
+    color:rgba(0, 131, 250, 0.85);
 }
 
 .blue-person,
@@ -48,7 +78,7 @@
 }
 
 .person-width {
-    width: calc((100% - 180px));
+    width: calc((100% - 130px));
 }
 
 
