@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Form, Button, Input } from 'antd'
+import { Form, Button, Popover } from 'antd'
 import CalendarMore from './CalendarMore'
 import CalendarDate from './CalendarDate'
 const data = [
@@ -43,18 +43,23 @@ function TestForm(props) {
             setDate(["202003", "202002"])
         }, 2000);
     }, [])
-    const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = props.form;
+    const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched, getFieldValue } = props.form;
     return (
         <div>
             <Form>
-                <Form.Item style={{ width: 300 }}>
-                    {getFieldDecorator('@param_month', {
-                        initialValue: date,
-                        rules: [{ required: true, message: 'Please input your Password!' }],
-                    })(
-                        <CalendarMore list={data} key={JSON.stringify(date)} />
-                    )}
-                </Form.Item>
+                <Popover content={((getFieldValue('@param_month') || []).length > 0 ? getFieldValue('@param_month') : date).join('，')}>
+                    <Form.Item style={{ width: 300 }}>
+                        {getFieldDecorator('@param_month', {
+                            initialValue: date,
+                            rules: [{ required: true, message: 'Please input your Password!' }],
+                        })(
+                            <CalendarMore list={data} key={JSON.stringify(date)} />
+                        )}
+                    </Form.Item>
+                </Popover>
+
+
+
                 <Form.Item style={{ width: 300 }}>
                     {getFieldDecorator('@param_month23', {
                         initialValue: ["20200322", "20200212"],
