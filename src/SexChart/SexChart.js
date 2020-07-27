@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './SexChart.css';
-import { Icon } from 'antd'
+import { Icon, Tooltip } from 'antd'
 import { download } from './download'
 import numeral from 'numeral'
 console.log("download", download)
@@ -108,7 +108,10 @@ function SexChart() {
                     {list.map((one, index) => <div key={index} className='row-sex-number'>
                         <div className='male-number number-width'>{getNumber(one.male)}</div>
                         <div className='male person-width'>
-                            <PersonNumber number={getPercentage(one.male)} />
+                            <Tooltip>
+                                <PersonNumber number={getPercentage(one.male)} />
+                            </Tooltip>
+
                         </div>
                         <div className='male-type'>{one.type}</div>
                         {/* <div className='female person-width'>

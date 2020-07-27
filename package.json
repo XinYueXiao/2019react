@@ -4,21 +4,27 @@
   "private": true,
   "dependencies": {
     "antd": "3.26.0",
+    "antd-dayjs-webpack-plugin": "^1.0.0",
+    "babel-plugin-import": "^1.13.0",
+    "customize-cra": "^1.0.0",
     "html2canvas": "^1.0.0-rc.5",
     "jquery": "^3.5.1",
+    "less": "^3.12.2",
+    "less-loader": "^6.2.0",
     "moment": "^2.27.0",
     "numeral": "^2.0.6",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
+    "react-app-rewired": "^2.1.6",
+    "react-copy": "^1.2.1",
     "react-dom": "^16.8.6",
     "react-ionicons": "^2.1.6",
     "react-scripts": "3.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test"
   },
   "eslintConfig": {
     "extends": "react-app"

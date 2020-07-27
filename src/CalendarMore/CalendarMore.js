@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, findDOMNode } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Icon } from 'antd'
 import moment from 'moment'
 import './CalendarMore.css'

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Form, Button, Input } from 'antd'
-import CalendarMore from './CalendarMore'
-import CalendarDate from './CalendarDate'
+import FeatureDay from './FeatureDay'
 const data = [
     {
         "code": "202002",
@@ -29,7 +28,6 @@ const data = [
     }
 ]
 function TestForm(props) {
-    const [date, setDate] = useState([])
     function submit(e) {
         e.preventDefault();
         props.form.validateFields((err, values) => {
@@ -38,29 +36,16 @@ function TestForm(props) {
             }
         });
     }
-    useEffect(() => {
-        setTimeout(() => {
-            setDate(["202003", "202002"])
-        }, 2000);
-    }, [])
     const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = props.form;
     return (
         <div>
             <Form>
                 <Form.Item style={{ width: 300 }}>
-                    {getFieldDecorator('@param_month', {
-                        initialValue: date,
+                    {getFieldDecorator('password', {
+                        initialValue: [],
                         rules: [{ required: true, message: 'Please input your Password!' }],
                     })(
-                        <CalendarMore list={data} key={JSON.stringify(date)} />
-                    )}
-                </Form.Item>
-                <Form.Item style={{ width: 300 }}>
-                    {getFieldDecorator('@param_month23', {
-                        initialValue: ["20200322", "20200212"],
-                        rules: [{ required: true, message: 'Please input your Password!' }],
-                    })(
-                        <CalendarDate list={data} key={JSON.stringify(date)} />
+                        <FeatureDay />
                     )}
                 </Form.Item>
                 <Button onClick={submit}>提交</Button>
